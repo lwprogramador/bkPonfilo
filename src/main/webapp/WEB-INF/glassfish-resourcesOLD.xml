@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
-<resources>
+<!--resources>
     <jdbc-connection-pool name="datos_ponfilo_pool"
                           allow-non-component-callers="false"
                           associate-with-thread="false"
@@ -41,4 +41,4 @@
         <property name="URL" value="jdbc:postgresql://localhost:5432/datos_ponfilo"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/arquillian" object-type="user" pool-name="datos_ponfilo_pool" />
-</resources>
+</resources-->

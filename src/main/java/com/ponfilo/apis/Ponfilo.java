@@ -9,14 +9,15 @@ import java.util.Set;
 
 @ApplicationPath("/api")
 public class Ponfilo extends Application {
-   /* private Set<Class<?>> endPoints = new HashSet<>();
+   private Set<Class<?>> endPoints = new HashSet<>();
 
     public Ponfilo() {
         endPoints.add(Inicio.class);
+        endPoints.add(Elementos.class);
     }
 
     @Override
     public Set<Class<?>> getClasses() {
         return endPoints;
-    }*/
+    }
 }

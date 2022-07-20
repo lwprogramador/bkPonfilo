@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <properties>
+        <!--PROPIEDADES APLICACION-->
+        <app.filename>ponfilo</app.filename>
+        <app.version>1.0</app.version>
+        <app.name>ponfilo</app.name>
+        <!--PROPIEDADES COMPILACION-->
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <!--PROPIEDADES DE VERSIONES-->
+        <version.payara>5.2021.7</version.payara>
+        <version.jsonwebtoken>0.9.1</version.jsonwebtoken>
+        <version.payara.maven.plugins>1.4.0</version.payara.maven.plugins>
+        <version.jakarta.ee>9.0.0</version.jakarta.ee>
+        <version.codehaus.mojo>1.1.0</version.codehaus.mojo>
+        <version.postgresql>42.2.14</version.postgresql>
+        <version.apache.maven.plugins>3.3.2</version.apache.maven.plugins>
+        <version.apache.maven.plugins.failsafe>3.0.0-M7</version.apache.maven.plugins.failsafe>
+        <version.google.code.gson>2.9.0</version.google.code.gson>
+        <version.jakarta.servlet>3.0.0</version.jakarta.servlet>
+        <version.jakarta.socket>2.1.0</version.jakarta.socket>
+        <version.eclipse.microprofile>3.0</version.eclipse.microprofile>
+    </properties>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ponfilo</groupId>
     <artifactId>ponfilo</artifactId>
-    <version>1.0</version>
     <packaging>war</packaging>
-    <name>ponfilo</name>
-
-    <properties>
-        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-        <version.payara>5.2021.7</version.payara>
-        <jakartaee>9.0.0</jakartaee>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>fish.payara.api</groupId>
-                <artifactId>payara-bom</artifactId>
-                <version>${version.payara}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.8.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>1.7.0.Alpha5</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <name>${app.name}</name>
+    <version>1.0</version>
 
     <dependencies>
         <!-- DEPENDENCIAS JAKARTA -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>${jakartaee}</version>
+            <version>${version.jakarta.ee}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <!--dependency>
             <groupId>jakarta.enterprise.concurrent</groupId>
             <artifactId>jakarta.enterprise.concurrent-api</artifactId>
             <scope>provided</scope>
@@ -65,24 +65,24 @@
             <groupId>jakarta.batch</groupId>
             <artifactId>jakarta.batch-api</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>3.0.0</version>
+            <version>${version.jakarta.servlet}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.websocket</groupId>
             <artifactId>jakarta.websocket-api</artifactId>
-            <version>2.1.0</version>
+            <version>${version.jakarta.socket}</version>
             <scope>provided</scope>
         </dependency>
         <!-- DEPENDENCIAS ECLIPSE -->
         <dependency>
             <groupId>org.eclipse.microprofile.openapi</groupId>
             <artifactId>microprofile-openapi-api</artifactId>
-            <version>3.0</version>
+            <version>${version.eclipse.microprofile}</version>
             <type>jar</type>
         </dependency>
         <!-- DEPENDENCIAS PAYARA -->
@@ -91,48 +91,72 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.14</version>
+            <version>${version.postgresql}</version>
         </dependency>
-        <!-- DEPENDENCIAS GSON GOOGLE -->
+        <!-- DEPENDENCIAS GSON GOOGLE - TOKEN SESION-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.9.0</version>
+            <version>${version.google.code.gson}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${version.jsonwebtoken}</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>ponfilo</finalName>
+        <finalName>${app.filename}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>${version.apache.maven.plugins}</version>
                 <configuration>
                     <warName>ponfilo</warName>
                 </configuration>
             </plugin>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>${version.codehaus.mojo}</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>src/main/resources/Propiedades/aplicacion.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--plugin>
                 <groupId>fish.payara.maven.plugins</groupId>
                 <artifactId>payara-micro-maven-plugin</artifactId>
-                <version>1.4.0</version>
+                <version>${version.payara.maven.plugins}</version>
                 <configuration>
                     <payaraVersion>${version.payara}</payaraVersion>
                     <deployWar>true</deployWar>
                     <commandLineOptions>
                         <option>
-                            <key>--autoBindHttp</key>
+                            <key>autoBindHttp</key>
                         </option>
                     </commandLineOptions>
                     <contextRoot>/</contextRoot>
                 </configuration>
-            </plugin>
+            </plugin-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>${version.apache.maven.plugins.failsafe}</version>
                 <executions>
                     <execution>
                         <id>integration-test</id>
@@ -157,5 +181,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
